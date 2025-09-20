@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "src/debug.h"
 #include "src/glad.h"
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -56,6 +57,7 @@ int main() {
 	glLinkProgram(program);
 
 	renderer_init();
+
 
 	while(!glfwWindowShouldClose(win)) {
 		glfwPollEvents();

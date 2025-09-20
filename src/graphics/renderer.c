@@ -57,7 +57,5 @@ void renderer_drawTest() {
 
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), x.vertexData, GL_STATIC_DRAW);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-	
 }
 
