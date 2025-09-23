@@ -12,14 +12,25 @@ static uint VBO;
 static uint VAO;
 static uint EBO;
 static mat4x4 ortho;
-
 static int indices[6] = {
 	0, 1, 2,
 	2, 3, 1
 };
+ 
 
 int renderer_glInit() {
 	return gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+}
+
+int renderer_glfwInit(int GL_majorVersion, int GL_minorVersion) {
+	int res = glfwInit();
+
+	glfwSwapInterval(1);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GL_majorVersion);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GL_minorVersion);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	return res;
 }
 
 int renderer_init() {
@@ -50,7 +61,7 @@ int renderer_init() {
 // im thinking that sprite.h and .c should basically just be a definition of what a sprite is 
 // and this file handles the rendering of sprite things. the sprite c file can handle things like
 // changing positon, rotation, scale, etc
-
+/*
 void renderer_drawTest() {
 	Sprite x;
 	initSprite(&x);
@@ -58,4 +69,4 @@ void renderer_drawTest() {
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), x.vertexData, GL_STATIC_DRAW);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
-
+*/

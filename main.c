@@ -12,20 +12,14 @@
 void keyPressedCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void framebufferSizeCallBack(GLFWwindow* window, int width, int height);
 
-
 int main() {
-	if(!glfwInit()) {
+	if(!renderer_glfwInit(3, 3)) {
 		return 1;
 	}
 
 	//TODO put all this glfw stuff into the renderer
 	// update the projection matrix inside the framebufferSizeCallBack func( make sure the resend the new matrix to the shader)
 	// yuh
-
-	glfwSwapInterval(1);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* win = glfwCreateWindow(920, 780, "AHDAHJGDH", NULL, NULL);
 	glfwMakeContextCurrent(win);
@@ -67,7 +61,7 @@ int main() {
 
 		glUseProgram(program);
 		
-		renderer_drawTest();
+
 
 		glfwSwapBuffers(win);
 	}

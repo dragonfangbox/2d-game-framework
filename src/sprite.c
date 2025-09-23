@@ -21,5 +21,4 @@ void initSprite(Sprite* s) {
 	s->vertexData[3] = (Vertex){{-0.5, -0.5, 0}, {0, 0}, {1, 0, 1 ,1}}; // bottom left
 	
 	mat4x4_identity(s->model);
-	mat4x4_translate(s->model, 0.5, 0, 0);
 }
