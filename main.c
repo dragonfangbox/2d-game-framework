@@ -21,9 +21,7 @@ int main() {
 	// update the projection matrix inside the framebufferSizeCallBack func( make sure the resend the new matrix to the shader)
 	// yuh
 
-	GLFWwindow* win = glfwCreateWindow(920, 780, "AHDAHJGDH", NULL, NULL);
-	glfwMakeContextCurrent(win);
-
+	GLFWwindow* win = renderer_newWindow(920, 780, "aklfhihjkafg");
 	glfwSetKeyCallback(win, keyPressedCallback);
 	glfwSetFramebufferSizeCallback(win, framebufferSizeCallBack);
 

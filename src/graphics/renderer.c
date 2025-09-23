@@ -1,9 +1,9 @@
+#define GLFW_INCLUDE_NONE
 #include "renderer.h"
 
 #include "../sprite.h"
 #include "../types.h"
 #include "../glad.h"
-#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 // this file should be the only file that includes glad, rendering should happen here
@@ -35,7 +35,7 @@ int renderer_glfwInit(int GL_majorVersion, int GL_minorVersion) {
 
 int renderer_init() {
 	mat4x4_identity(ortho);
-	mat4x4_ortho(ortho, 1, 1, 1, 1, 1, 1);
+	mat4x4_ortho(ortho, 1, 1, 1, 1, 1, 1); // this is wrong fix it
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -57,6 +57,13 @@ int renderer_init() {
 	return 1;
 }
 
+GLFWwindow* renderer_newWindow(int width, int height, char* name) {
+	GLFWwindow* win = glfwCreateWindow(width, height, name, NULL, NULL);
+	glfwMakeContextCurrent(win);
+
+	return win;
+
+}
 // other initalizing stuff here.
 // im thinking that sprite.h and .c should basically just be a definition of what a sprite is 
 // and this file handles the rendering of sprite things. the sprite c file can handle things like
