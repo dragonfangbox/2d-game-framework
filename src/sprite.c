@@ -22,3 +22,7 @@ void initSprite(Sprite* s) {
 	
 	mat4x4_identity(s->model);
 }
+
+void setSpriteImage(Sprite* s, unsigned char* image) {
+	s->image = image;
+}
