@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "linmath.h"
+#include "image.h"
 
 typedef struct {
 	vec2 pos;
@@ -12,7 +13,7 @@ typedef struct {
 } Sprite;
 
 void initSprite(Sprite* s);
-void setSpriteImage(Sprite* s, unsigned char* image);
+void setSpriteImage(Sprite* s, Image* i);
 
 
 #endif

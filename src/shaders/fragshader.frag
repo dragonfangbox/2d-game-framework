@@ -5,6 +5,8 @@ in vec4 color;
 
 out vec4 fragment;
 
+uniform sampler2D tex0;
+
 void main() {
-	fragment = vec4(color);
+	fragment = texture(tex0, texCoord) * vec4(color);
 };

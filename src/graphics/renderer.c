@@ -15,7 +15,7 @@ static uint EBO;
 static mat4x4 ortho;
 static int indices[6] = {
 	0, 1, 2,
-	2, 3, 1
+	1, 3, 2,
 };
  
 
@@ -37,9 +37,10 @@ int renderer_glfwInit(int GL_majorVersion, int GL_minorVersion) {
 int renderer_init() {
 	mat4x4_identity(ortho);
 	mat4x4_ortho(ortho, 1, 1, 1, 1, 1, 1); // this is wrong fix it
-
+	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_NEAREST);
+	glEnable(GL_TEXTURE_2D);
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -73,8 +74,6 @@ GLFWwindow* renderer_newWindow(int width, int height, char* name) {
 }
 
 void renderer_drawSprite(Sprite* s) {
-	
-
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), s->vertexData, GL_STATIC_DRAW);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

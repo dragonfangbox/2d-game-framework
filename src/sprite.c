@@ -15,14 +15,14 @@ void initSprite(Sprite* s) {
 		return;
 	}
 
-	s->vertexData[0] = (Vertex){{0.5, 0.5, 0}, {0, 0}, {1, 0, 0 ,1}}; // top right
-	s->vertexData[1] = (Vertex){{0.5, -0.5, 0}, {0, 0}, {0, 1, 0 ,1}}; // bottom right
-	s->vertexData[2] = (Vertex){{-0.5, 0.5, 0}, {0, 0}, {0, 0, 1 ,1}}; // top left
+	s->vertexData[0] = (Vertex){{0.5, 0.5, 0}, {1, 1}, {1, 0, 0 ,1}}; // top right
+	s->vertexData[1] = (Vertex){{0.5, -0.5, 0}, {1, 0}, {0, 1, 0 ,1}}; // bottom right
+	s->vertexData[2] = (Vertex){{-0.5, 0.5, 0}, {0, 1}, {0, 0, 1 ,1}}; // top left
 	s->vertexData[3] = (Vertex){{-0.5, -0.5, 0}, {0, 0}, {1, 0, 1 ,1}}; // bottom left
 	
 	mat4x4_identity(s->model);
 }
 
-void setSpriteImage(Sprite* s, unsigned char* image) {
-	s->image = image;
+void setSpriteImage(Sprite* s, Image* i) {
+	s->image = i->data;
 }

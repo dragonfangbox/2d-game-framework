@@ -51,15 +51,30 @@ int main() {
 	glAttachShader(program, fragShader);
 	glLinkProgram(program);
 
-	unsigned char* image = image_loadImage("assets/scribble.xcf");
+	Image test;
+	if(!image_loadImage(&test, "/home/josiah/programming/c/openglstuff/2d-game-framework/assets/scribble1.png")) {
+		debug_printf("image load failed");
+	}
+
 	uint texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D()
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, test.width, test.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, test.data);
+
+	glUseProgram(program);
+	glUniform1i(glGetUniformLocation(program, "tex0"), 0);
 
 	Sprite x;
-	setSpriteImage(&x, image);
+	setSpriteImage(&x, &test);
 	initSprite(&x);
+
+	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), x.vertexData, GL_STATIC_DRAW);
 
 	while(!glfwWindowShouldClose(win)) {
 		glfwPollEvents();
@@ -67,15 +82,19 @@ int main() {
 		glClearColor(0.2, 0.4, 0.7, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+
 		glUseProgram(program);
-		renderer_drawSprite(&x);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	//	renderer_drawSprite(&x);
 
 		glfwSwapBuffers(win);
 	}
 
 	free(vertshadersrc);
 	free(fragshadersrc);
-	image_freeImage(image);
+	image_freeImage(&test);
 
 	glfwDestroyWindow(win);
 	glfwTerminate();
